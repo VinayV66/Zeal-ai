@@ -1,0 +1,173 @@
+[
+  {
+    "id": 1,
+    "name": "iPhone 14 Pro",
+    "price": 129999,
+    "rating": 4.8,
+    "brand": "Apple",
+    "category": "Smartphone",
+    "description": "Premium Apple smartphone with A16 Bionic chip.",
+    "features": [
+      "6.1-inch display",
+      "48MP camera",
+      "Face ID",
+      "Dynamic Island",
+      "5G support"
+    ],
+    "specifications": {
+      "Storage": "128GB",
+      "Battery": "3200mAh",
+      "OS": "iOS"
+    },
+    "images": ["iphone.jpg"]
+  },
+  {
+    "id": 2,
+    "name": "Samsung Galaxy S23",
+    "price": 89999,
+    "rating": 4.6,
+    "brand": "Samsung",
+    "category": "Smartphone",
+    "description": "Flagship Android smartphone with powerful performance.",
+    "features": [
+      "6.1-inch AMOLED",
+      "50MP camera",
+      "Snapdragon processor",
+      "5G support",
+      "Fast charging"
+    ],
+    "specifications": {
+      "Storage": "256GB",
+      "Battery": "3900mAh",
+      "OS": "Android"
+    },
+    "images": ["samsung.jpg"]
+  },
+  {
+    "id": 3,
+    "name": "JBL WH-1000XM5",
+    "price": 29999,
+    "rating": 4.7,
+    "brand": "Sony",
+    "category": "Headphones",
+    "description": "Noise cancelling wireless headphones.",
+    "features": [
+      "ANC",
+      "30-hour battery",
+      "Touch controls",
+      "Fast charging",
+      "Premium sound"
+    ],
+    "specifications": {
+      "Battery": "30 hrs",
+      "Connectivity": "Bluetooth"
+    },
+    "images": ["headphones.jpg"]
+  },
+  {
+    "id": 4,
+    "name": "Adidas",
+    "price": 7999,
+    "rating": 4.5,
+    "brand": "Nike",
+    "category": "Shoes",
+    "description": "Comfortable running shoes.",
+    "features": [
+      "Lightweight",
+      "Air cushioning",
+      "Stylish design",
+      "Breathable",
+      "Durable sole"
+    ],
+    "specifications": {
+      "Material": "Mesh",
+      "Type": "Running"
+    },
+    "images": ["shoes.jpg"]
+  },
+  {
+    "id": 5,
+    "name": "Dell XPS 13 Laptop",
+    "price": 125000,
+    "rating": 4.7,
+    "brand": "Dell",
+    "category": "Laptop",
+    "description": "Premium ultrabook for professionals.",
+    "features": [
+      "13-inch display",
+      "Intel i7 processor",
+      "16GB RAM",
+      "512GB SSD",
+      "Lightweight"
+    ],
+    "specifications": {
+      "RAM": "16GB",
+      "Storage": "512GB SSD",
+      "OS": "Windows"
+    },
+    "images": ["laptop.jpg"]
+  },
+  {
+    "id": 6,
+    "name": "Apple Watch Series 9",
+    "price": 45999,
+    "rating": 4.6,
+    "brand": "Apple",
+    "category": "Smartwatch",
+    "description": "Advanced smartwatch with fitness tracking.",
+    "features": [
+      "Heart rate monitor",
+      "GPS",
+      "Water resistant",
+      "Fitness tracking",
+      "Always-on display"
+    ],
+    "specifications": {
+      "Battery": "18 hrs",
+      "Connectivity": "Bluetooth"
+    },
+    "images": ["watch.jpg"]
+  },
+  {
+    "id": 7,
+    "name": "Canon EOS 1500D Camera",
+    "price": 38999,
+    "rating": 4.5,
+    "brand": "Canon",
+    "category": "Camera",
+    "description": "DSLR camera for photography beginners.",
+    "features": [
+      "24.1MP",
+      "WiFi",
+      "Full HD video",
+      "Lightweight",
+      "Good battery"
+    ],
+    "specifications": {
+      "Sensor": "APS-C",
+      "Battery": "500 shots"
+    },
+    "images": ["camera.jpg"]
+  },
+  {
+    "id": 8,
+    "name": "Boult Earbuds 141",
+    "price": 1499,
+    "rating": 4.3,
+    "brand": "Boat",
+    "category": "Earbuds",
+    "description": "Affordable wireless earbuds.",
+    "features": [
+      "Bluetooth 5.0",
+      "42-hour playback",
+      "Fast charging",
+      "Lightweight",
+      "Good bass"
+    ],
+    "specifications": {
+      "Battery": "42 hrs",
+      "Connectivity": "Bluetooth"
+    },
+    "images": ["earbuds.jpg"]
+  }
+]
