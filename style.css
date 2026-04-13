@@ -1,0 +1,386 @@
+/* ---------------- GENERAL ---------------- */
+body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f5efe6;
+    margin: 0;
+    color: #333;
+}
+
+/* ---------------- NAVBAR ---------------- */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.logo-z {
+    color: #c57b57;
+}
+
+/* SEARCH */
+.search-box {
+    display: flex;
+    width: 40%;
+}
+
+.search-box input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px 0 0 8px;
+}
+
+.search-box button {
+    padding: 10px;
+    border-radius: 0 8px 8px 0;
+    background: #c57b57;
+    color: white;
+    border: none;
+}
+
+/* RIGHT */
+.nav-right {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.cart {
+    background: #c57b57;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+}
+
+/* ---------------- PRODUCT PAGE ---------------- */
+.product-container {
+    display: flex;
+    gap: 40px;
+    padding: 40px;
+    justify-content: center;
+}
+
+/* IMAGE FIX 🔥 */
+.product-image {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-image img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;          /* 🔥 FIX */
+    object-fit: contain;   /* 🔥 IMPORTANT */
+    border-radius: 12px;
+}
+
+/* DETAILS */
+.product-details {
+    max-width: 500px;
+}
+
+/* ---------------- PRODUCT GRID ---------------- */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+    padding: 30px;
+}
+
+/* CARD */
+.card {
+    background: white;
+    width: 230px;
+    padding: 15px;
+    border-radius: 16px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    text-align: center;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+}
+
+/* IMAGE FIX 🔥 */
+.card img {
+    width: 100%;
+    height: 180px;
+    object-fit: contain;  /* 🔥 FIX */
+    background: #fff;
+    border-radius: 12px;
+}
+
+/* TEXT */
+.brand {
+    color: #888;
+    font-size: 14px;
+}
+
+.price {
+    font-size: 18px;
+    font-weight: bold;
+    color: #c57b57;
+}
+
+/* BUTTON */
+button {
+    padding: 10px;
+    background: #c57b57;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #a96545;
+}
+/* -------- CHAT LAYOUT -------- */
+.main-container {
+    display: flex;
+}
+
+/* SIDEBAR */
+.history-sidebar {
+    width: 25%;
+    background: #2d2a26;
+    color: white;
+    height: 100vh;
+    padding: 10px;
+    overflow-y: auto;
+}
+
+/* HEADER */
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* HISTORY ITEMS */
+.history-item {
+    background: #3a3733;
+    padding: 8px;
+    margin: 6px 0;
+    border-radius: 6px;
+}
+
+/* CHAT SECTION */
+.chat-section {
+    width: 75%;
+    transition: 0.3s;
+}
+/* 🔔 NOTIFICATION */
+.notification {
+    position: relative;
+    cursor: pointer;
+}
+
+.badge {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background: red;
+    color: white;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 50%;
+}
+.main-container {
+    display: flex;
+}
+
+.history-sidebar {
+    width: 25%;
+    background: #2d2a26;
+    color: white;
+    height: 100vh;
+    padding: 10px;
+}
+
+.sidebar-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.history-item {
+    background: #3a3733;
+    padding: 8px;
+    margin: 6px 0;
+    border-radius: 6px;
+}
+
+.chat-section {
+    width: 75%;
+}
+/* ---------------- ZEAL AI BANNER ---------------- */
+.ai-banner {
+    text-align: center;
+    background: white;
+    margin: 20px auto;
+    padding: 20px;
+    width: 80%;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.ai-banner h2 {
+    margin: 0;
+    color: #c57b57;
+}
+
+.ai-banner p {
+    color: gray;
+    margin-top: 5px;
+}
+
+/* ---------------- NOTIFICATION ---------------- */
+.notification {
+    position: relative;
+    cursor: pointer;
+}
+
+.badge {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background: red;
+    color: white;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 50%;
+}
+/* 🔥 CHAT POPUP */
+.chat-popup {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 300px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+/* HEADER */
+.chat-header {
+    background: #c57b57;
+    color: white;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* BODY */
+.chat-body {
+    height: 250px;
+    overflow-y: scroll;
+    padding: 10px;
+}
+
+/* INPUT */
+.chat-input {
+    display: flex;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 10px;
+}
+
+.chat-input button {
+    background: #c57b57;
+    color: white;
+}
+
+/* MESSAGE STYLE */
+.user-msg {
+    background: #d4eac7;
+    padding: 8px;
+    margin: 5px;
+    border-radius: 8px;
+    text-align: right;
+}
+
+.bot-msg {
+    background: #eee;
+    padding: 8px;
+    margin: 5px;
+    border-radius: 8px;
+}
+/* COMPARE SECTION */
+.compare-section {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 20px;
+}
+
+/* BOX */
+.compare-box {
+    text-align: center;
+}
+
+/* IMAGE */
+.compare-box img {
+    width: 220px;
+    height: 220px;
+    object-fit: contain;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+}
+/* SIMILAR QUESTIONS */
+.similar-item {
+    background: #f0f0f0;
+    padding: 6px;
+    margin: 5px;
+    border-radius: 6px;
+    cursor: pointer;
+    width: fit-content;
+}
+
+.similar-item:hover {
+    background: #ddd;
+}
+.compare-section {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 20px;
+}
+
+.compare-box img {
+    width: 220px;
+    height: 220px;
+    object-fit: contain;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
+.compare-section {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-top: 20px;
+}
+
+.compare-box {
+    text-align: center;
+}
+
+.compare-box img {
+    width: 220px;
+    height: 220px;
+    object-fit: contain;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+}
