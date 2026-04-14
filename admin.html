@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Admin Panel</title>
+</head>
+<body>
+
+<h2 style="text-align:center;">🛠 Admin Panel</h2>
+
+<table border="1" style="margin:auto; width:80%;">
+    <tr>
+        <th>ID</th>
+        <th>Question</th>
+        <th>Answer</th>
+        <th>Action</th>
+    </tr>
+
+    {% for q in questions %}
+    <tr>
+        <td>{{ q[0] }}</td>
+        <td>{{ q[3] }}</td>
+        <td>
+            <input type="text" id="ans{{ q[0] }}">
+        </td>
+        <td>
+            <button onclick="submitAnswer({{ q[0] }})">Submit</button>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<script>
+function submitAnswer(id) {
+    let ans = document.getElementById("ans" + id).value;
+
+    fetch('/answer', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            id: id,
+            answer: ans
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        alert("Answer saved!");
+        location.reload();
+    });
+}
+</script>
+
+</body>
+</html>
