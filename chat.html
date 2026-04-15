@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ZEAL AI Chat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="navbar">
+    <div class="logo">
+        <span class="logo-z">Z</span>MART
+    </div>
+
+    <div class="search-box">
+        <input type="text" placeholder="Search products...">
+        <button>🔍</button>
+    </div>
+
+    <div class="nav-right">
+        <span>🔔</span>
+        <span>👤</span>
+        <span class="cart">🛒</span>
+    </div>
+</div>
+
+<h2 style="text-align:center;">🤖 ZEAL AI - {{ product.name }}</h2>
+
+<!-- CHAT -->
+<div class="chat-box" id="chatBox"></div>
+
+<!-- 🔥 SIMILAR QUESTIONS -->
+<div id="similarBox" style="margin: 10px;"></div>
+
+<!-- INPUT -->
+<div class="input-box">
+    <input type="text" id="question" placeholder="Ask something...">
+    <button onclick="startMic()">🎤</button>
+    <button onclick="sendMessage()">Send</button>
+</div>
+
+<script>
+let shownAnswers = new Set();
+
+// 🔥 PREDEFINED QUESTIONS
+const sampleQuestions = [
+    "What is the price?",
+    "What is the brand?",
+    "What is the color?",
+    "What is the battery life?",
+    "Is it durable?",
+    "What are the features?",
+    "What is the size?",
+    "Is it good quality?",
+    "What is the material?"
+];
+
+// -------- LOAD HISTORY --------
+function loadHistory() {
+    fetch('/get-history/{{ product.id }}')
+    .then(res => res.json())
+    .then(data => {
+        let chatBox = document.getElementById("chatBox");
+
+        data.forEach(item => {
+            chatBox.innerHTML += `
+                <div class="user-msg">${item.question}</div>
+                <div class="bot-msg">${item.answer}</div>
+            `;
+        });
+
+        scrollToBottom();
+    });
+}
+
+// -------- SEND MESSAGE --------
+function sendMessage() {
+    let input = document.getElementById("question");
+    let chatBox = document.getElementById("chatBox");
+
+    let question = input.value;
+    if (question.trim() === "") return;
+
+    chatBox.innerHTML += `<div class="user-msg">${question}</div>`;
+    chatBox.innerHTML += `<div class="bot-msg" id="loading">🤖 Thinking...</div>`;
+
+    input.value = "";
+
+    // 🔥 SHOW SIMILAR QUESTIONS
+    showSimilarQuestions(question);
+
+    fetch('/ask', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            question: question,
+            image: "{{ product.images[0] }}",
+            product_id: {{ product.id }}
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("loading").remove();
+        chatBox.innerHTML += `<div class="bot-msg">${data.answer}</div>`;
+        scrollToBottom();
+
+        loadAdminAnswers();
+    });
+}
+
+// -------- SIMILAR QUESTIONS --------
+function showSimilarQuestions(userQuestion) {
+    let container = document.getElementById("similarBox");
+
+    container.innerHTML = "<b>Similar Questions:</b><br>";
+
+    let keyword = userQuestion.toLowerCase().split(" ")[0];
+
+    let found = sampleQuestions.filter(q =>
+        q.toLowerCase().includes(keyword)
+    );
+
+    if (found.length === 0) {
+        found = sampleQuestions.slice(0, 3);
+    }
+
+    found.forEach(q => {
+        container.innerHTML += `
+            <div class="similar-item" onclick="useSuggestion('${q}')">
+                ${q}
+            </div>
+        `;
+    });
+}
+
+// -------- CLICK SUGGESTION --------
+function useSuggestion(text) {
+    document.getElementById("question").value = text;
+}
+
+// -------- ADMIN ANSWERS --------
+function loadAdminAnswers() {
+    fetch('/get-answers/{{ product.id }}')
+    .then(res => res.json())
+    .then(data => {
+        let chatBox = document.getElementById("chatBox");
+
+        data.forEach(item => {
+            let key = item.question + item.answer;
+
+            if (shownAnswers.has(key)) return;
+
+            chatBox.innerHTML += `
+                <div class="bot-msg">🔔 ${item.answer}</div>
+            `;
+
+            shownAnswers.add(key);
+        });
+
+        scrollToBottom();
+    });
+}
+
+// -------- SCROLL --------
+function scrollToBottom() {
+    let chatBox = document.getElementById("chatBox");
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+
+// -------- MIC --------
+function startMic() {
+    const recognition = new webkitSpeechRecognition();
+    recognition.lang = "en-US";
+
+    recognition.onresult = function(event) {
+        document.getElementById("question").value =
+            event.results[0][0].transcript;
+    };
+
+    recognition.start();
+}
+
+// INIT
+window.onload = function() {
+    loadHistory();
+    loadAdminAnswers();
+};
+</script>
+
+</body>
+</html>
