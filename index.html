@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ZMART</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<!-- 🔥 HEADER -->
+<div class="navbar">
+    <div class="logo"><span class="logo-z">Z</span>MART</div>
+
+    <div class="search-box">
+        <input type="text" placeholder="Search products...">
+        <button>🔍</button>
+    </div>
+
+    <div class="nav-right">
+        <div class="notification">🔔<span class="badge">0</span></div>
+        <span>👤</span>
+        <span class="cart">🛒</span>
+    </div>
+</div>
+
+<!-- 🤖 ZEAL AI -->
+<div class="ai-banner" onclick="openChat()">
+    <h2>🤖 ZEAL AI – Your Smart Shopping Assistant</h2>
+    <p>Click to start chatting</p>
+</div>
+
+<h1>Explore Products</h1>
+
+<div class="container">
+    {% for product in products %}
+    <div class="card">
+        <img src="{{ url_for('static', filename='images/' + product.images[0]) }}">
+        <h3>{{ product.name }}</h3>
+        <p class="price">₹{{ product.price }}</p>
+
+        <a href="/product/{{ product.id }}">
+            <button>View Details</button>
+        </a>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- 🔥 CHAT POPUP -->
+<div class="chat-popup" id="chatPopup">
+
+    <div class="chat-header">
+        <span>🤖 ZEAL AI</span>
+        <button onclick="closeChat()">✖</button>
+    </div>
+
+    <div class="chat-body" id="chatBody"></div>
+
+    <div class="chat-input">
+        <input type="text" id="popupQuestion" placeholder="Ask something...">
+        <button onclick="sendPopupMessage()">Send</button>
+    </div>
+
+</div>
+
+<script>
+// OPEN
+function openChat() {
+    document.getElementById("chatPopup").style.display = "block";
+}
+
+// CLOSE
+function closeChat() {
+    document.getElementById("chatPopup").style.display = "none";
+}
+
+// SEND MESSAGE
+function sendPopupMessage() {
+    let input = document.getElementById("popupQuestion");
+    let chat = document.getElementById("chatBody");
+
+    let question = input.value;
+    if (question.trim() === "") return;
+
+    chat.innerHTML += `<div class="user-msg">${question}</div>`;
+    chat.innerHTML += `<div class="bot-msg" id="loading">Thinking...</div>`;
+
+    input.value = "";
+
+    fetch('/ask', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            question: question,
+            image: "iphone.jpg",
+            product_id: 1
+        })
+    })
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById("loading").remove();
+        chat.innerHTML += `<div class="bot-msg">${data.answer}</div>`;
+        chat.scrollTop = chat.scrollHeight;
+    });
+}
+</script>
+
+</body>
+</html>
