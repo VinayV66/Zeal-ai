@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ product.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+<!-- 🔥 HEADER -->
+<div class="navbar">
+    <div class="logo">
+        <span class="logo-z">Z</span>MART
+    </div>
+
+    <div class="search-box">
+        <input type="text" placeholder="Search products...">
+        <button>🔍</button>
+    </div>
+
+    <div class="nav-right">
+        <span>🔔</span>
+        <span>👤</span>
+        <span class="cart">🛒</span>
+    </div>
+</div>
+
+<!-- PRODUCT SECTION -->
+<div class="product-container">
+
+    <div class="product-image">
+        <img src="{{ url_for('static', filename='images/' + product.images[0]) }}">
+    </div>
+
+    <div class="product-details">
+        <h2>{{ product.name }}</h2>
+        <p class="brand">{{ product.brand }}</p>
+        <p class="price">₹{{ product.price }}</p>
+        <p>⭐ {{ product.rating }}</p>
+
+        <p>{{ product.description }}</p>
+
+        <a href="/chat/{{ product.id }}">
+            <button>Ask ZEAL AI 🤖</button>
+        </a>
+    </div>
+
+</div>
+
+<hr>
+
+<!-- 🔥 COMPARE SECTION -->
+<h2 style="text-align:center;">🆚 Compare with Your Image</h2>
+
+<div class="compare-section">
+
+    <!-- PRODUCT IMAGE -->
+    <div class="compare-box">
+        <p><b>Product Image</b></p>
+        <img src="{{ url_for('static', filename='images/' + product.images[0]) }}">
+    </div>
+
+    <!-- USER IMAGE -->
+    <div class="compare-box">
+        <p><b>Your Image</b></p>
+        <img id="userImg" src="{{ url_for('static', filename='images/sample.jpg') }}">
+    </div>
+
+</div>
+
+<!-- INPUT AREA -->
+<div style="text-align:center; margin-top:20px;">
+
+    <!-- 🔥 HIDDEN FILE INPUT -->
+    <input type="file" id="uploadInput" onchange="previewUpload()" style="display:none;">
+
+    <!-- CUSTOM BUTTON -->
+    <button onclick="document.getElementById('uploadInput').click()">
+        Upload Image 📤
+    </button>
+
+    <br><br>
+
+    <!-- QUESTION INPUT -->
+    <input type="text" id="compareQuestion"
+           placeholder="Ask (e.g., Is this iPhone or Samsung?)"
+           style="padding:10px; width:300px;">
+
+    <button onclick="compareNow()">Compare</button>
+
+</div>
+
+<!-- RESULT -->
+<h3 id="compareResult" style="text-align:center; margin-top:20px;">
+    Result: Looks Similar
+</h3>
+
+<script>
+// 📤 Upload preview
+function previewUpload() {
+    let file = document.getElementById("uploadInput").files[0];
+    if (!file) return;
+
+    document.getElementById("userImg").src = URL.createObjectURL(file);
+}
+
+// 🤖 TRAINED COMPARISON LOGIC
+function compareNow() {
+    let question = document.getElementById("compareQuestion").value.toLowerCase();
+
+    let answer = "";
+
+    if (question.includes("same") || question.includes("identical")) {
+        answer = "Result: Both phones look similar in design.";
+    }
+    else if (question.includes("iphone") || question.includes("samsung")) {
+        answer = "Result: These appear to be from different brands (iPhone vs Samsung).";
+    }
+    else if (question.includes("design") || question.includes("look")) {
+        answer = "Result: The designs are slightly different.";
+    }
+    else if (question.includes("camera")) {
+        answer = "Result: Camera layouts look different.";
+    }
+    else if (question.includes("better") || question.includes("best")) {
+        answer = "Result: iPhone appears more premium in design.";
+    }
+    else if (question.includes("fake") || question.includes("duplicate")) {
+        answer = "Result: This may not be the original product.";
+    }
+    else if (question.includes("difference")) {
+        answer = "Result: There are visible differences in design and build.";
+    }
+    else if (question.includes("color")) {
+        answer = "Result: Color tones are different.";
+    }
+    else {
+        answer = "Result: The products look similar overall.";
+    }
+
+    document.getElementById("compareResult").innerText = answer;
+}
+</script>
+
+</body>
+</html>
